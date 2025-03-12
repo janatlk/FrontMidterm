@@ -38,6 +38,7 @@ const HomePage = () => {
                 console.error("Ошибка загрузки объявлений:", error);
             } finally {
                 setLoading(false);
+                console.log(loading);
             }
         };
 

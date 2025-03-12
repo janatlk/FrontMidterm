@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../AxiosApi";
+import { AppBar, Box, Button, Container, Toolbar, Typography, Menu, MenuItem, IconButton } from "@mui/material";
 
 const Header = () => {
     const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [openMenu, setOpenMenu] = useState(false);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -24,15 +27,54 @@ const Header = () => {
         fetchCategories();
     }, []);
 
+    const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+        setOpenMenu(true);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        setOpenMenu(false);
+    };
+
     return (
-        <nav style={{ padding: "10px", background: "#f5f5f5", display: "flex", gap: "15px" }}>
-            <Link to="/">Все объявления</Link>
-            {categories.map((category) => (
-                <Link key={category.id} to={`/category/${category.id}`}>
-                    {category.name}
-                </Link>
-            ))}
-        </nav>
+        <AppBar position="sticky" sx={{ backgroundColor: "#1976d2" }}>
+            <Container maxWidth="xl">
+                <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+                            Все объявления
+                        </Link>
+                    </Typography>
+
+                    {/* Desktop Menu for categories */}
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: "20px" }}>
+                        {categories.map((category) => (
+                            <Button key={category.id} color="inherit">
+                                <Link to={`/category/${category.id}`} style={{ color: "white", textDecoration: "none" }}>
+                                    {category.name}
+                                </Link>
+                            </Button>
+                        ))}
+                    </Box>
+
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: "20px" }}>
+                        <Button color="inherit">
+                            <Link to="/createCategory" style={{ color: "white", textDecoration: "none" }}>
+                                Создать категорию
+                            </Link>
+                        </Button>
+                        <Button color="inherit">
+                            <Link to="/createAd" style={{ color: "white", textDecoration: "none" }}>
+                                Создать объявление
+                            </Link>
+                        </Button>
+                    </Box>
+
+
+                </Toolbar>
+            </Container>
+        </AppBar>
     );
 };
 
