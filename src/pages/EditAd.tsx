@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../AxiosApi";
+import './css/Inputs.css'
 
 const EditAd = () => {
     const { id } = useParams();

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../AxiosApi";
+import './css/Inputs.css'
 
 const CreateCategory = () => {
     const [name, setName] = useState("");

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import api from "../AxiosApi";
-
+import {MenuItem, Select, TextField} from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import './css/Inputs.css'
 const CreateAd = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -66,45 +69,57 @@ const CreateAd = () => {
     };
 
     return (
-        <div>
+        <div className={'Container'}>
             <h2>Создать объявление</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Название"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                <textarea
-                    placeholder="Описание"
+            <div className="content">
+            <form onSubmit={handleSubmit} >
+                <TextField id="outlined-basic"
+                           className={'TextField'}
+                           label="Название"
+                           variant="outlined"
+                           type={'text'}
+                           value={title}
+                           sx={{marginBottom:1}}
+                           onChange={(e) => setTitle(e.target.value)}/>
+                <TextField id="outlined-basic"
+                           className={'TextField'}
+                    label={"Описание"}
                     value={description}
+                           sx={{marginBottom:1}}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <input
-                    type="number"
-                    placeholder="Цена"
+                <TextField id="outlined-basic"
+                           className={'TextField'}
+                    type={"number"}
+                    label={"Цена"}
                     value={price}
+                           sx={{marginBottom:1}}
                     onChange={(e) => setPrice(e.target.value)}
                 />
-                <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-                    <option value="">Выберите категорию</option>
+                <FormControl component="fieldset" sx={{ m: 0, minWidth: 170 }}>
+                <InputLabel id="outlined-basic" >Категория</InputLabel>
+                <Select sx={{marginBottom:1}} fullWidth label='Выберите Категорию' value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
                     {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
+                        <MenuItem key={category.id} value={category.id}>
                             {category.name}
-                        </option>
+                        </MenuItem>
                     ))}
-                </select>
-                <input
+                </Select>
+                </FormControl>
+                <TextField
+                    sx={{marginBottom:1}}
+                    className={'TextField'}
                     type="text"
-                    placeholder="Ссылка на изображение"
+                    label="Ссылка на изображение"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                 />
-                <button type="submit" disabled={loading}>
+                <button type="submit" disabled={loading} className={'Button '}>
                     {loading ? "Добавление..." : "Добавить"}
                 </button>
             </form>
             {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
         </div>
     );
 };

@@ -1,0 +1,22 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+}
+h2{
+    display: flex;
+    justify-content: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+}
+.TextField {
+    margin-bottom: 10px;
+}
+.content {
+    display: flex;
+    justify-content: center;
+
+}
