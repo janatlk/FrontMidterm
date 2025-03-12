@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../AxiosApi";
-import { AppBar, Box, Button, Container, Toolbar, Typography, Menu, MenuItem, IconButton } from "@mui/material";
+import { AppBar, Box, Button, Container, Toolbar, Typography} from "@mui/material";
 
 const Header = () => {
     const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [openMenu, setOpenMenu] = useState(false);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -26,16 +24,6 @@ const Header = () => {
 
         fetchCategories();
     }, []);
-
-    const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-        setOpenMenu(true);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        setOpenMenu(false);
-    };
 
     return (
         <AppBar position="sticky" sx={{ backgroundColor: "#1976d2" }}>
