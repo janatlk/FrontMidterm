@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../AxiosApi";
 import './css/Inputs.css'
+import {TextField} from "@mui/material";
+import Button from "@mui/material/Button";
 
 const EditCategory = () => {
     const { id } = useParams();
@@ -47,19 +49,22 @@ const EditCategory = () => {
     };
 
     return (
-        <div>
+        <div className="Container">
             <h2>Редактировать категорию</h2>
+            <div className="content">
             <form onSubmit={handleSubmit}>
-                <input
+                <TextField
+                    sx={{marginBottom:1}}
                     type="text"
-                    placeholder="Название категории"
+                    label="Название категории"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <button type="submit" disabled={loading}>
+                <Button variant={"contained"} disabled={loading}>
                     {loading ? "Обновление..." : "Обновить"}
-                </button>
+                </Button>
             </form>
+            </div>
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
     );

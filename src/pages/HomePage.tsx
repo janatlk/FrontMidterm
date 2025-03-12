@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../AxiosApi";
 import { useNavigate } from "react-router-dom";
-
+import ActionAreaCard from "../components/Card";
 const HomePage = () => {
     const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
     const [ads, setAds] = useState<{ id: string; title: string; description: string; price: number; imageUrl: string; categoryId: string }[]>([]);
@@ -61,18 +61,17 @@ const HomePage = () => {
             <h2>Все объявления</h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
                 {ads.map((ad) => (
-                    <div
+                    <ActionAreaCard
                         key={ad.id}
+                        image={ad.imageUrl}
+                        title={ad.title}
+                        price={ad.price}
                         onClick={() => navigate(`/ad/${ad.id}`)}
                         style={{ cursor: "pointer", border: "1px solid #ddd", padding: "10px", width: "250px" }}
-                    >
-                        <img src={ad.imageUrl} alt={ad.title} style={{ width: "100%", height: "150px", objectFit: "cover" }} />
-                        <h3>{ad.title}</h3>
-                        <p>{ad.description}</p>
-                        <p><strong>Цена:</strong> {ad.price} $</p>
-                    </div>
+                    />
                 ))}
             </div>
+
         </div>
     );
 };
