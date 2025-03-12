@@ -58,8 +58,9 @@ const HomePage = () => {
                         <ListItem
                             key={category.id}
                             style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+
                         >
-                            <ListItemText primary={category.name} />
+                            <ListItemText primary={category.name} onClick={() => navigate(`/category/${category.id}`)} style={{color:"blue",cursor:"pointer"}}/>
                             <Button
                                 variant="contained"
                                 color="primary"
