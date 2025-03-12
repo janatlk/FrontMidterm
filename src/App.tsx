@@ -8,10 +8,12 @@ import EditCategory from "./pages/EditCategory.tsx";
 import AdDetail from "./pages/AdDetail.tsx";
 import EditAd from "./pages/EditAd.tsx";
 import CategoryAds from "./pages/CategoryAds.tsx";
+import Header from "./components/Header.tsx";
 function App() {
 
   return (
       <>
+          <Header></Header>
     <Routes>
         <Route path={'/'} element={<HomePage/>}></Route>
         <Route path={'/createAd'} element={<CreateAd/>}></Route>
