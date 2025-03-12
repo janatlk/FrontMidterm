@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../AxiosApi";
-
+import CardFocused from "../components/CardFocused.tsx";
 const AdDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -48,13 +48,18 @@ const AdDetail = () => {
 
     return (
         <div>
-            <h2>{ad.title}</h2>
-            <img src={ad.imageUrl} alt={ad.title} style={{ width: "300px", height: "200px", objectFit: "cover" }} />
-            <p><strong>Описание:</strong> {ad.description}</p>
-            <p><strong>Цена:</strong> {ad.price} $</p>
+            <h2>Детали объявления</h2>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+            <CardFocused
+                image={ad.imageUrl}
+                title={ad.title}
+                description={ad.description}
+                price={ad.price.toString()}
+                onEdit={() => navigate(`/edit-ad/${id}`)}
+                onDelete={handleDelete}
+            />
 
-            <button onClick={() => navigate(`/edit-ad/${id}`)}>Редактировать</button>
-            <button onClick={handleDelete} style={{ marginLeft: "10px", color: "red" }}>Удалить</button>
+            </div>
         </div>
     );
 };

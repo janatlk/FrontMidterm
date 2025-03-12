@@ -60,7 +60,7 @@ const EditCategory = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <Button variant={"contained"} disabled={loading}>
+                <Button variant={"contained"} type={"submit"    } disabled={loading}>
                     {loading ? "Обновление..." : "Обновить"}
                 </Button>
             </form>

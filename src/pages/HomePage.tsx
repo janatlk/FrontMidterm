@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import api from "../AxiosApi";
 import { useNavigate } from "react-router-dom";
 import ActionAreaCard from "../components/Card";
+import './css/HomePage.css'
+import {ListItem, List, ListItemText, Button} from "@mui/material";
+
 const HomePage = () => {
     const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
     const [ads, setAds] = useState<{ id: string; title: string; description: string; price: number; imageUrl: string; categoryId: string }[]>([]);
@@ -47,30 +50,45 @@ const HomePage = () => {
     }, []);
 
     return (
-        <div>
-            <h2>Категории</h2>
-            <ul>
-                {categories.map((category) => (
-                    <li key={category.id} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        {category.name}
-                        <button onClick={() => navigate(`/edit-category/${category.id}`)}>Редактировать</button>
-                    </li>
-                ))}
-            </ul>
-
-            <h2>Все объявления</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-                {ads.map((ad) => (
-                    <ActionAreaCard
-                        key={ad.id}
-                        image={ad.imageUrl}
-                        title={ad.title}
-                        price={ad.price}
-                        onClick={() => navigate(`/ad/${ad.id}`)}
-                        style={{ cursor: "pointer", border: "1px solid #ddd", padding: "10px", width: "250px" }}
-                    />
-                ))}
+        <div className='Container1'>
+            <div className={'FirstHalf'}>
+                <h2>Категории</h2>
+                <List>
+                    {categories.map((category) => (
+                        <ListItem
+                            key={category.id}
+                            style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                        >
+                            <ListItemText primary={category.name} />
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => navigate(`/edit-category/${category.id}`)}
+                            >
+                                Редактировать
+                            </Button>
+                        </ListItem>
+                    ))}
+                </List>
             </div>
+
+            <div className={'SecondHalf'}>
+                <div>
+                    <h2>Все объявления</h2>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+                    {ads.map((ad) => (
+                        <ActionAreaCard
+                            key={ad.id}
+                            image={ad.imageUrl}
+                            title={ad.title}
+                            price={ad.price}
+                            onClick={() => navigate(`/ad/${ad.id}`)}
+                        />
+                    ))}
+                </div>
+            </div>
+
 
         </div>
     );
