@@ -1,7 +1,9 @@
 import { useState } from "react";
 import api from "../AxiosApi";
 import './css/Inputs.css'
-
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import KeyboardDoubleArrowRightOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowRightOutlined';
 const CreateCategory = () => {
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
@@ -26,20 +28,23 @@ const CreateCategory = () => {
     };
 
     return (
-        <div>
+        <div className="Container">
             <h2>Создать категорию</h2>
+            <div className="content">
             <form onSubmit={handleSubmit}>
-                <input
+                <TextField
+                    sx={{marginBottom:1}}
                     type="text"
-                    placeholder="Название категории"
+                    label="Название категории"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <button type="submit" disabled={loading}>
+                <Button variant={'contained'} type="submit" disabled={loading} endIcon={<KeyboardDoubleArrowRightOutlinedIcon />}>
                     {loading ? "Добавление..." : "Добавить"}
-                </button>
+                </Button>
             </form>
             {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
         </div>
     );
 };

@@ -4,6 +4,8 @@ import {MenuItem, Select, TextField} from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import './css/Inputs.css'
+import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
+import Button from "@mui/material/Button";
 const CreateAd = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -114,9 +116,9 @@ const CreateAd = () => {
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                 />
-                <button type="submit" disabled={loading} className={'Button '}>
+                <Button variant={'contained'} type="submit" disabled={loading} endIcon={<KeyboardDoubleArrowRightOutlinedIcon />}>
                     {loading ? "Добавление..." : "Добавить"}
-                </button>
+                </Button>
             </form>
             {error && <p style={{ color: "red" }}>{error}</p>}
             </div>
